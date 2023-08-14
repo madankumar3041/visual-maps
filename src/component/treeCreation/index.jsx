@@ -5,11 +5,11 @@ const Tree = () => {
   const [treeData, setTreeData] = useState([
     {
       id: 1,
-      name: "Parent 1",
+      name: "Page 1",
       children: [
         {
           id: 1.1,
-          name: "Parent 1.1",
+          name: "Page 1",
           children: [
             {
               id: 1.2,
@@ -25,12 +25,12 @@ const Tree = () => {
         },
         {
           id: 1.2,
-          name: "Parent 1",
+          name: "Page 2",
           children: [],
         },
         {
           id: 1.2,
-          name: "Parent 1",
+          name: "page 3",
           children: [],
         },
       ],
@@ -75,7 +75,12 @@ const Tree = () => {
       <div className="node-container">
         {nodes?.map((node) => (
           <div key={node?.id} className={`node ${node?.id}`}>
-            <p onClick={() => handleNodeClick(node)}>{node?.name}</p>
+            <div
+              className={`box ${node?.children?.length > 0 ? "" : "last"}`}
+              onClick={() => handleNodeClick(node)}
+            >
+              <div className="container">{node?.name}</div>
+            </div>
             {node?.children?.length > 0 && renderTree(node?.children)}
           </div>
         ))}
@@ -95,7 +100,13 @@ const Tree = () => {
           Mercy Dove
         </h2>
       </header>
-      {renderTree(treeData)}
+      <div className="body">
+        <div className="container">
+          <div className="content">
+            {renderTree(treeData)}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
